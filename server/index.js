@@ -24,7 +24,7 @@ massive(config.connection)
 
 app.use(express.static(__dirname + './../build'))
 
-var userController = require("./userController.js");
+var boggle = require("./boggle.js");
 
 //////////Endpoints for the front end
 
