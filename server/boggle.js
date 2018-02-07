@@ -1,14 +1,8 @@
 var app = require('./index.js');
 var db = app.get('db');
+const wordList = require('./dictionary.js');
 
-const dictionary = ['hello', 'rot', 'sir', 'you', 'are', 'the', 'tea', 'tap', 'pot', 'car', 'race', 'soar', 'big', 'enough', 'far', 'son', 'lot', 'for', 'not'];
-
-var board = [
-  ['x', 'r', 's', 'i'],
-  ['a', 'f', 's', 'w'],
-  ['r', 'o', 'n', 'q'],
-  ['p', 't', 'l', 'h']
-];
+const dictionary = wordList.dictionary;
 
 let words = [];
 
@@ -30,7 +24,7 @@ function findWordsUtil(board, visited, i, j, str){
 
   for (let row = i-1; row <= i+1 && row <= 3; row++){
     for (let col = j-1; col <= j+1 && col <= 3; col++){
-      if (str.length < 8 && row >= 0 && col >= 0 && !visited[row][col]){
+      if (str.length < 4 && row >= 0 && col >= 0 && !visited[row][col]){
         findWordsUtil(board, visited, row, col, str);
       }
     }
@@ -53,9 +47,10 @@ function findWords(board){
       findWordsUtil(board, visited, i, j, str);
     }
   }
+  console.log(words);
   return words;
 }
 
-findWords(board);
-
-module.exports = {};
+module.exports = {
+  findWords
+};

@@ -1,3 +1,4 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -28,6 +29,14 @@ var boggle = require("./boggle.js");
 
 //////////Endpoints for the front end
 
+var board = [
+  ['x', 'r', 'l', 'e'],
+  ['a', 'f', 'l', 'h'],
+  ['r', 'o', 'n', 'q'],
+  ['p', 't', 'l', 'h']
+];
+
+boggle.findWords(board);
 
 
 
