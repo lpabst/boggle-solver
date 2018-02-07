@@ -73,6 +73,12 @@ class Home extends Component {
           loading: false
         })
       })
+      .catch( err => {
+        this.setState({
+          matches: ['Error'],
+          loading: false
+        })
+      })
   }
 
   handleKeyDown(e){

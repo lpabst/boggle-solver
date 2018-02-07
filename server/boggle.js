@@ -23,7 +23,7 @@ function findWordsUtil(board, visited, i, j, str){
 
   for (let row = i-1; row <= i+1 && row <= 3; row++){
     for (let col = j-1; col <= j+1 && col <= 3; col++){
-      if (str.length < 8 && row >= 0 && col >= 0 && !visited[row][col]){
+      if (str.length < 9 && row >= 0 && col >= 0 && !visited[row][col]){
         findWordsUtil(board, visited, row, col, str);
       }
     }
