@@ -31,7 +31,6 @@ var boggle = require("./boggle.js");
 
 app.post('/api/getWords', function(req, res, next){
   let board = req.body;
-  console.log(board);
   let words = boggle.findWords(board);
   return res.status(200).send(words);
 })

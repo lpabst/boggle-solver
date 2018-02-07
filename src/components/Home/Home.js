@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './Home.css';
 
+import loadingGif from './../../media/loading.gif';
+
 
 class Home extends Component {
   constructor(props) {
@@ -13,7 +15,8 @@ class Home extends Component {
         ['', '', '', ''], 
         ['', '', '', ''], 
         ['', '', '', '']
-      ]
+      ],
+      loading: false,
     }
 
     this.updateBoard = this.updateBoard.bind(this);
@@ -60,11 +63,14 @@ class Home extends Component {
       })
     }
 
+    this.setState({loading: true});
+
     // If all spaces are filled in, get the word matches from the back end
     axios.post('/api/getWords', this.state.board)
       .then(res => {
         this.setState({
-          matches: res.data
+          matches: res.data,
+          loading: false
         })
       })
   }
@@ -76,6 +82,12 @@ class Home extends Component {
   render() {
     return (
       <div className="home">
+
+        {
+          this.state.loading ?
+            <img src={loadingGif} className="loading_gif" alt='loading' />
+          : null
+        }
 
         <h2>Boggle Word Finder</h2>
 

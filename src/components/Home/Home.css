@@ -7,6 +7,14 @@
     padding-top: 20px;
 }
 
+.loading_gif{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+}
+
 .home h2{
     width: 100%;
     text-align: center;
