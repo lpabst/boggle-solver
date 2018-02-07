@@ -18,10 +18,10 @@ app.use(session({
     }
 }))
 
-massive(config.connection)
-.then( db => {
-  app.set('db', db);
-})
+// massive(config.connection)
+// .then( db => {
+//   app.set('db', db);
+// })
 
 app.use(express.static(__dirname + './../build'))
 
@@ -29,14 +29,12 @@ var boggle = require("./boggle.js");
 
 //////////Endpoints for the front end
 
-var board = [
-  ['x', 'r', 'l', 'e'],
-  ['a', 'f', 'l', 'h'],
-  ['r', 'o', 'n', 'q'],
-  ['p', 't', 'l', 'h']
-];
-
-boggle.findWords(board);
+app.post('/api/getWords', function(req, res, next){
+  let board = req.body;
+  console.log(board);
+  let words = boggle.findWords(board);
+  return res.status(200).send(words);
+})
 
 
 

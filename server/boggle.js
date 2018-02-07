@@ -18,13 +18,13 @@ function findWordsUtil(board, visited, i, j, str){
   visited[i][j] = true;
   str = str + board[i][j];
 
-  if (isWord(str)){
+  if (str.length > 2 && !words.includes(str) && isWord(str)){
     words.push(str);
   }
 
   for (let row = i-1; row <= i+1 && row <= 3; row++){
     for (let col = j-1; col <= j+1 && col <= 3; col++){
-      if (str.length < 4 && row >= 0 && col >= 0 && !visited[row][col]){
+      if (str.length < 5 && row >= 0 && col >= 0 && !visited[row][col]){
         findWordsUtil(board, visited, row, col, str);
       }
     }
@@ -47,7 +47,7 @@ function findWords(board){
       findWordsUtil(board, visited, i, j, str);
     }
   }
-  console.log(words);
+  // console.log(words);
   return words;
 }
 
