@@ -1,13 +1,12 @@
 var app = require('./index.js');
 var db = app.get('db');
-const wordList = require('./dictionary.js');
-
-const dictionary = wordList.dictionary;
+const dictionary = require('./dictionary.js');
 
 let words = [];
 
 function isWord(str){
-  if (dictionary.includes(str)){
+  let firstLetter = str.substring(0,1);
+  if (dictionary[firstLetter].includes(str)){
     return true;
   }else{
     return false;
@@ -24,7 +23,7 @@ function findWordsUtil(board, visited, i, j, str){
 
   for (let row = i-1; row <= i+1 && row <= 3; row++){
     for (let col = j-1; col <= j+1 && col <= 3; col++){
-      if (str.length < 5 && row >= 0 && col >= 0 && !visited[row][col]){
+      if (str.length < 8 && row >= 0 && col >= 0 && !visited[row][col]){
         findWordsUtil(board, visited, row, col, str);
       }
     }
