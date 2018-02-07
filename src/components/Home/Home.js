@@ -30,10 +30,10 @@ class Home extends Component {
       
       let inputs = document.getElementsByTagName('input');
       let activeElement = document.activeElement;
-      for (var i = 0; i < inputs.length; i++){
+      for (var m = 0; m < inputs.length; m++){
         // If they typed something in so it's not empty, and we aren't on the last input, focus the next input
-        if (e.target.value && i < inputs.length-1 && inputs[i] === activeElement){
-          return inputs[i+1].focus();
+        if (e.target.value && m < inputs.length-1 && inputs[m] === activeElement){
+          return inputs[m+1].focus();
         }
       }
       
@@ -77,16 +77,7 @@ class Home extends Component {
     return (
       <div className="home">
 
-        <div className='results_box'>
-          <p>Results</p>
-          <div className='results' value={this.state.matches} >
-            {
-              this.state.matches.map( (item, i) => {
-                return <p key={i}>{item}</p>
-              })
-            }
-          </div>
-        </div>
+        <h2>Boggle Word Finder</h2>
 
         <div className='board'>
           <div className='row'>
@@ -115,6 +106,17 @@ class Home extends Component {
           </div>
 
           <button onClick={this.submitBoard} >Submit</button>
+        </div>
+        
+        <div className='results_box'>
+          <p>Results</p>
+          <div className='results' value={this.state.matches} >
+            {
+              this.state.matches.map( (item, i) => {
+                return <p key={i}>{item}</p>
+              })
+            }
+          </div>
         </div>
 
       </div>
