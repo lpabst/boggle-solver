@@ -1,6 +1,6 @@
 dictionary word count by length:
-
-{ '3': 834,
+{ 
+  '3': 834,
   '4': 5013,
   '5': 12915,
   '6': 26129,
@@ -14,37 +14,59 @@ dictionary word count by length:
   '14': 13819,
   '15': 8678,
   '16': 5144,
-  'longer': 5845 }
+  'longer': 5845,
+}
 
 
 
-  letter combination counts by length (up to 12):
+  letter combination counts by length:
+  { 
+    '1': 16,
+    '2': 84,
+    '3': 408,
+    '4': 1764,
+    '5': 6712,
+    '6': 22672,
+    '7': 68272,
+    '8': 183472,
+    '9': 436984,
+    '10': 905776,
+    '11': 1594648,
+    '12': 2310264,
+    '13': 2644520,
+    '14': 2250192,
+    '15': 1260672,
+    '16': 343184,
+    longer: 0,
+    'total': 12029640,
+  }
 
-  { '3': 385,
-  '4': 1720,
-  '5': 6678,
-  '6': 22658,
-  '7': 68270,
-  '8': 183472,
-  '9': 436984,
-  '10': 905775,
-  '11': 1594647,
-  '12': 2310263,
-  '13': 0,
-  '14': 0,
-  '15': 0,
-  '16': 0,
-  longer: 0 }
-- This is how many time we check the dictionary basically for each length. There are 2,310,263 ways to combine 12 Boggle cubes, so we will check the dictionary that many times. We need our longer words to be the most efficient. The lower lengths aren't as big of a deal.
+- This is how many times we check the dictionary for each length basically. There are 12,029,640 ways to combine the Boggle cubes, so we will check the dictionary that many times. We need our longer words to be the most efficient (13 is the peak). The lower lengths aren't as big of a deal.
+
+
 
 
 TESTS
 Tests that return more words take longer in general i.e. including lots of Z, X, and Q characters makes it run faster.
 
-letter set: abomtaniionsywzp
+letter set: abomtaniionsrpla (3 letters per nested array, 3 levels deep)
+  7, 10, 16 = 1, 2, 3 levels deep
+    12 limit = 3038 ms 
+    14 limit = 6500 ms 
+    16 limit = 7600 ms 
+  6, 9, 16 = 1, 2, 3 levels deep 
+    12 = 3174
+    14 = 6555
+    16 = 7700 ms 
 
-Using 5, 7, and 16 to split my dictionary into 1 level deep, 2 deep, and 3 deep:
-  - Using the same letter set, a 10 character limit took around 800ms, 11 = 1565ms, and 12 = 2700ms.
+7 and under = 3975 subarrays
+10 and under = 3032 subarrays with 61810 subarrays total
+16 and under = 2115, 29103, 62686 total nested
 
-Using 7, 10, and 16 to split 1, 2, and 3 levels deep:
-  - Using the same letter set as above 10 = 800ms, 11 = 1565ms , 12 = 2700ms.
+
+letter set: abomtaniionsrpla (2 letters per nested array, 4 levels deep)
+  - Speed tests are about as the same as the 3X3 tests above, possibly even a little slower, so I'm not going to nest any deeper than this
+5 and under = 389 subarrays 
+8 and under = 371, 18052
+11 and under = 302, 11680, 49563
+16 and under = 253, 5870, 20719, 37338
