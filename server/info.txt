@@ -1,0 +1,50 @@
+dictionary word count by length:
+
+{ '3': 834,
+  '4': 5013,
+  '5': 12915,
+  '6': 26129,
+  '7': 38148,
+  '8': 48062,
+  '9': 49406,
+  '10': 42994,
+  '11': 35670,
+  '12': 27884,
+  '13': 20227,
+  '14': 13819,
+  '15': 8678,
+  '16': 5144,
+  'longer': 5845 }
+
+
+
+  letter combination counts by length (up to 12):
+
+  { '3': 385,
+  '4': 1720,
+  '5': 6678,
+  '6': 22658,
+  '7': 68270,
+  '8': 183472,
+  '9': 436984,
+  '10': 905775,
+  '11': 1594647,
+  '12': 2310263,
+  '13': 0,
+  '14': 0,
+  '15': 0,
+  '16': 0,
+  longer: 0 }
+- This is how many time we check the dictionary basically for each length. There are 2,310,263 ways to combine 12 Boggle cubes, so we will check the dictionary that many times. We need our longer words to be the most efficient. The lower lengths aren't as big of a deal.
+
+
+TESTS
+Tests that return more words take longer in general i.e. including lots of Z, X, and Q characters makes it run faster.
+
+letter set: abomtaniionsywzp
+
+Using 5, 7, and 16 to split my dictionary into 1 level deep, 2 deep, and 3 deep:
+  - Using the same letter set, a 10 character limit took around 800ms, 11 = 1565ms, and 12 = 2700ms.
+
+Using 7, 10, and 16 to split 1, 2, and 3 levels deep:
+  - Using the same letter set as above 10 = 800ms, 11 = 1565ms , 12 = 2700ms.
