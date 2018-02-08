@@ -17,6 +17,7 @@ class Home extends Component {
         ['', '', '', '']
       ],
       loading: false,
+      resultsScore: 0,
     }
 
     this.updateBoard = this.updateBoard.bind(this);
@@ -65,12 +66,33 @@ class Home extends Component {
 
     this.setState({loading: true});
 
-    // If all spaces are filled in, get the word matches from the back end
+    // If all spaces are filled in, get the word matches from the back end and count up the points
     axios.post('/api/getWords', this.state.board)
       .then(res => {
+        let matches = res.data;
+        let sum = 0;
+        let scoring = {
+          3: 1,
+          4: 1,
+          5: 2,
+          6: 3,
+          7: 5,
+          longer: 11,
+        }
+
+        for (var i in matches){
+          let length = matches[i].length;
+          if (scoring[length]){
+            sum += scoring[length];
+          }else{
+            sum += 11
+          }
+        }
+
         this.setState({
           matches: res.data,
-          loading: false
+          loading: false,
+          resultsScore: sum
         })
       })
       .catch( err => {
@@ -127,7 +149,7 @@ class Home extends Component {
         </div>
         
         <div className='results_box'>
-          <p>Results</p>
+          <p>Results ({this.state.resultsScore} points)</p>
           <div className='results' value={this.state.matches} >
             {
               this.state.matches.map( (item, i) => {
