@@ -21,10 +21,29 @@ class Home extends Component {
       ],
       loading: false,
       resultsScore: 0,
+      organizeBy: 'alphabetically',
+      include: {
+        3: true,
+        4: true,
+        5: true,
+        6: true,
+        7: true,
+        8: true,
+        9: true,
+        10: true,
+        11: true,
+        12: true,
+        13: true,
+        14: true,
+        15: true,
+        16: true,
+      },
     }
 
     this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
     this.closeSettingsModal = this.closeSettingsModal.bind(this);
+    this.updateOrganization = this.updateOrganization.bind(this);
+    this.updateInclusions = this.updateInclusions.bind(this);
     this.updateBoard = this.updateBoard.bind(this);
     this.submitBoard = this.submitBoard.bind(this);
   }
@@ -39,6 +58,18 @@ class Home extends Component {
     this.setState({
       showSettingsModal: false
     })
+  }
+
+  updateOrganization(newVal){
+    this.setState({
+      organizeBy: newVal
+    })
+  }
+
+  updateInclusions(target, newVal){
+    let include = this.state.include;
+    include[target] = newVal;
+    this.setState({include});
   }
 
   updateBoard(i, j, e) {
@@ -84,7 +115,7 @@ class Home extends Component {
     this.setState({loading: true});
 
     // If all spaces are filled in, get the word matches from the back end and count up the points
-    axios.post('/api/getWords', this.state.board)
+    axios.post('/api/getWords', {board: this.state.board, include: this.state.include} )
       .then(res => {
         let matches = res.data;
         let sum = 0;
@@ -106,8 +137,10 @@ class Home extends Component {
           }
         }
 
+        matches = this.organizeResults(matches);
+
         this.setState({
-          matches: res.data,
+          matches: matches,
           loading: false,
           resultsScore: sum
         })
@@ -120,6 +153,25 @@ class Home extends Component {
       })
   }
 
+  organizeResults(arr){
+    arr = arr.sort();
+    if (this.state.organizeBy === 'by length'){
+      let sorting = true;
+      while (sorting){
+        sorting = false;
+        for (var i = 0; i < arr.length-1; i++){
+          if (arr[i].length < arr[i+1].length){
+            let temp = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp;
+            sorting = true;
+          }
+        }
+      }
+    }
+    return arr;
+  }
+
   handleKeyDown(e){
 
   }
@@ -128,8 +180,7 @@ class Home extends Component {
     return (
       <div className="home">
 
-        {
-          this.state.loading ?
+        { this.state.loading ?
             <img src={loadingGif} className="loading_gif" alt='loading' />
           : null
         }
@@ -138,9 +189,8 @@ class Home extends Component {
           <button className="toggle_settings_btn" onClick={this.toggleSettingsModal} >Settings</button>
         </div>
 
-        {
-          this.state.showSettingsModal ?
-            <Settings close={this.closeSettingsModal} />
+        { this.state.showSettingsModal ?
+            <Settings close={this.closeSettingsModal} include={this.state.include} organizeBy={this.state.organizeBy} updateOrganization={this.updateOrganization} updateInclusions={this.updateInclusions} />
           : null
         }
 

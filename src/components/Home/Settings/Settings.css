@@ -1,12 +1,14 @@
 
 .settings{
     width: 300px;
-    height: 500px;
+    height: 200px;
     background: #eee;
     position: fixed;
-    top: 20px;
+    top: calc(50% - 100px);
     left: calc(50% - 150px);
     padding: 40px 7px 7px 7px;
+    border-radius: 2px;
+    box-shadow: 2px 2px 4px #333;
 }
 
 .settings_close{
