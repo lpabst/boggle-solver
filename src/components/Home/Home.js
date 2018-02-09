@@ -48,30 +48,37 @@ class Home extends Component {
     this.submitBoard = this.submitBoard.bind(this);
   }
 
+  // Opens/closes the settings modal
   toggleSettingsModal(){
     this.setState({
       showSettingsModal: !this.state.showSettingsModal
     })
   }
 
+  // closes the settings modal
   closeSettingsModal(){
     this.setState({
       showSettingsModal: false
     })
   }
 
+  // Updates the organization value on state. This function is passes as a prop to the settings modal component
   updateOrganization(newVal){
     this.setState({
       organizeBy: newVal
     })
   }
 
+  // Updates the inclusions object on state. This function is passes as a prop to the settings modal component. 
+  // Only words with the lengths listed as 'true' in this object will be included in the results.
   updateInclusions(target, newVal){
     let include = this.state.include;
     include[target] = newVal;
     this.setState({include});
   }
 
+  // Updates the board inputs as you type. Also checks that the user only types letters into the board, and only 
+  // one letter per space. Automatically makes the letters lowercase. Also auto focuses the next input as the user types.
   updateBoard(i, j, e) {
     let board = [...this.state.board];
     // If they backspaced so it's empty, OR they typed in just one letter, do this stuff
@@ -92,6 +99,14 @@ class Home extends Component {
     }
   }
 
+  /* 
+    Checks that all of the spaces are filled in. If not, it alerts the user. If so, it adds the loading gif, and submits 
+    the board to the back end, along with the inclusions object. The back end will figure out all of the word 
+    combinations that are contained in the dictionary, include only results with lenths listed as 'true' in the inclusions
+    object, and then send it back to the front end. This function then adds up the total point value of the results, then
+    calls the organizeResults() function to organize the results according to the setting the user has specified in the 
+    settings modal. Lastly it removes the loading gif from the screen and updates state with the results and the point total
+  */
   submitBoard() {
 
     let filledIn = true;
@@ -153,6 +168,8 @@ class Home extends Component {
       })
   }
 
+  // This function is called by the submitBoard() function once it gets results from the back end. this function organizes the 
+  // results alphabetically, and ALSO by length if the user has selected that setting.
   organizeResults(arr){
     arr = arr.sort();
     if (this.state.organizeBy === 'by length'){
@@ -170,10 +187,6 @@ class Home extends Component {
       }
     }
     return arr;
-  }
-
-  handleKeyDown(e){
-
   }
 
   render() {
