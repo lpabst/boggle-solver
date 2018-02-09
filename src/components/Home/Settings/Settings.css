@@ -6,6 +6,7 @@
     position: fixed;
     top: 20px;
     left: calc(50% - 150px);
+    padding: 40px 7px 7px 7px;
 }
 
 .settings_close{
@@ -20,3 +21,19 @@
     right: 15px;
     cursor: pointer;
 }
+
+.setting_container{
+    position: relative; 
+    margin-bottom: 15px;
+}
+
+.setting_container p, .setting_container input{
+    display: inline-block;
+    margin: 0px 2px;
+}
+
+.checkbox_wrapper{
+    width: 25%;
+    display: inline-block;
+}
+
