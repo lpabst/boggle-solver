@@ -48,6 +48,8 @@ class Settings extends Component {
           <div className="checkbox_wrapper"><input onChange={(e) => this.props.updateInclusions('16', e.target.checked)} checked={this.props.include['16']} type='checkbox' /><p>16</p></div>
         </div>
 
+        <p>By default we leave 13-16 unchecked to speed things up, but feel free to include them if you want</p>
+
       </section>
     );
   }
