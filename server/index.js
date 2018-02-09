@@ -30,8 +30,9 @@ var boggle = require("./boggle.js");
 //////////Endpoints for the front end
 
 app.post('/api/getWords', function(req, res, next){
-  let board = req.body;
-  let words = boggle.findWords(board);
+  let board = req.body.board;
+  let include = req.body.include;
+  let words = boggle.findWords(board, include);
   return res.status(200).send(words);
 })
 

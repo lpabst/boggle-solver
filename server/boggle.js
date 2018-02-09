@@ -61,6 +61,7 @@ for (let i = 0; i < list.length; i++){
 }
 
 let words = [];
+let includeLengths = {};
 
 let wordCheckCount = 0;
 let debugCount = 0;
@@ -108,7 +109,7 @@ function findWordsUtil(board, visited, i, j, str){
   visited[i][j] = true;
   str = str + board[i][j];
 
-  if (str.length > 2 && !words.includes(str) && isWord(str)){
+  if (str.length > 2 && !words.includes(str) && isWord(str) && includeLengths[str.length]){
     words.push(str);
   }
 
@@ -124,11 +125,12 @@ function findWordsUtil(board, visited, i, j, str){
   visited[i][j] = false;
 }
 
-function findWords(board){
+function findWords(board, include){
   let ms1 = new Date();
   ms1 = ms1.getTime();
 
   words = [];
+  includeLengths = include;
   let visited = [
     [false, false, false, false],
     [false, false, false, false],

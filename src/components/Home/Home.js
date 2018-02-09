@@ -21,7 +21,7 @@ class Home extends Component {
       ],
       loading: false,
       resultsScore: 0,
-      organizeBy: 'alphabetically',
+      organizeBy: 'by length',
       include: {
         3: true,
         4: true,
