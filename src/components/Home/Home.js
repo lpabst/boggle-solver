@@ -4,11 +4,14 @@ import './Home.css';
 
 import loadingGif from './../../media/loading.gif';
 
+import Settings from './Settings/Settings.js';
+
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showSettingsModal: false,
       matches: [],
       board: [
         ['', '', '', ''], 
@@ -20,8 +23,22 @@ class Home extends Component {
       resultsScore: 0,
     }
 
+    this.toggleSettingsModal = this.toggleSettingsModal.bind(this);
+    this.closeSettingsModal = this.closeSettingsModal.bind(this);
     this.updateBoard = this.updateBoard.bind(this);
     this.submitBoard = this.submitBoard.bind(this);
+  }
+
+  toggleSettingsModal(){
+    this.setState({
+      showSettingsModal: !this.state.showSettingsModal
+    })
+  }
+
+  closeSettingsModal(){
+    this.setState({
+      showSettingsModal: false
+    })
   }
 
   updateBoard(i, j, e) {
@@ -114,6 +131,16 @@ class Home extends Component {
         {
           this.state.loading ?
             <img src={loadingGif} className="loading_gif" alt='loading' />
+          : null
+        }
+
+        <div className='toggle_settings'>
+          <button className="toggle_settings_btn" onClick={this.toggleSettingsModal} >Settings</button>
+        </div>
+
+        {
+          this.state.showSettingsModal ?
+            <Settings close={this.closeSettingsModal} />
           : null
         }
 
