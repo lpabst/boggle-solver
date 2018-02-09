@@ -33,10 +33,10 @@ class Home extends Component {
         10: true,
         11: true,
         12: true,
-        13: true,
-        14: true,
-        15: true,
-        16: true,
+        13: false,
+        14: false,
+        15: false,
+        16: false,
       },
     }
 
