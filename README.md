@@ -10,5 +10,5 @@ I've organized the dictionary into a trie data structure. The first split is bas
     -For words 9-11 letters long, it's the same idea, but 3 levels deep.
     -For words 12-16 letters long, it's the same idea, but 4 levels deep.
 
-Searching the entire Boggle board takes about 7.5 seconds with the current data structure and algorithm. Check out server/info.txt to see some of the test results
+Searching the entire Boggle board takes about 7.5 seconds (on my laptop) with the current data structure and algorithm. Check out server/info.txt to see some of the test results
 
