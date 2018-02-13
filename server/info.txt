@@ -70,3 +70,8 @@ letter set: abomtaniionsrpla (2 letters per nested array, 4 levels deep)
 8 and under = 371, 18052
 11 and under = 302, 11680, 49563
 16 and under = 253, 5870, 20719, 37338
+
+setTimeout tests
+  - An interesting test I did with the setTimeout function. At the beginning of the findWords() function I added 2 console.logs before anything else. I put the second one inside a setTimeout function. The first one logged right at the beginning, but the one inside the setTimeout function waited to fire until everything else was finished, including the 5-7 second delay to look up all of the words in the dictionary. The moral of the story is that the setTimeout function places its contents at the end of the callstack (or maybe even inside a completely new callstack?). Placing something inside a setTimeout ensures that it will run after everything else that is already in the current callstack. 
+
+  - Another interesting tidbit is that I tried giving the setTimeout a 2000 ms delay, but it logged immediately after the dictionary lookup and timing logs. My thoughts here are that whatever delay you give it, it waits that long to place its contents in the callstack, but then the callstack still has to finish executing things before it will fire off whatever was inside the setTimeout. 
