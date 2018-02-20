@@ -39,7 +39,7 @@
 }
 
 .board{
-    width: 210px;
+    max-width: 220px;
     height: 210px;
     margin: 20px auto 50px auto;
 }
